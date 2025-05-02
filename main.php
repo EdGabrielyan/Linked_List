@@ -4,16 +4,18 @@ require_once 'LinkedList.php';
 
 $list = new LinkedList();
 
-$list->insert(10);
-$list->insert(20);
-$list->insert(30);
-$list->insert(40);
+$list->insert(1);
+$list->insert(2);
+$list->insert(3);
+$list->insert(4);
 
-echo "Original list:\n";
+echo "before. \n";
 $list->display();
 
-$list->delete(20);
-
-echo "After deleting 20:\n";
+echo "after insertion. \n";
+echo $list->insertAtPosition(77, 4);
+echo "\n";
 $list->display();
 
+//$list->reverse();
+//$list->display();

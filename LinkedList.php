@@ -30,20 +30,25 @@ class LinkedList
 
     public function display(): void
     {
+        if ($this->head === null)
+        {
+            echo "List is empty\n";
+            return ;
+        }
         $current = $this->head;
         while ($current != null)
         {
             echo $current->data . " -> ";
             $current = $current->next;
         }
-        echo "NULL\n";
+        echo "NULL.\n";
     }
 
-    public function delete($key)
+    public function delete($key): void
     {
         if ($this->head === null)
         {
-            return null;
+            return;
         }
 
         $current = $this->head;
@@ -56,6 +61,96 @@ class LinkedList
         {
             $current->next = $current->next->next;
         }
+    }
+
+    public function insertAtBeginning($data): void
+    {
+        $newNode = new Node($data);
+        $newNode->next = $this->head;
+        $this->head = $newNode;
+    }
+
+    public function deleteFirst()
+    {
+        if ($this->head == null)
+        {
+            echo "List is already empty.\n";
+        } else {
+            $this->head = $this->head->next;
+        }
+    }
+
+    public function search($value): bool
+    {
+        $current = $this->head;
+
+        while ($current != null)
+        {
+            if ($current->data == $value)
+            {
+                return true;
+            }
+            $current = $current->next;
+        }
+        return false;
+    }
+
+    public function countNodes(): int
+    {
+        $current = $this->head;
+        $count = 0;
+
+        while ($current != null)
+        {
+            $current = $current->next;
+            ++$count;
+        }
+
+        return $count;
+    }
+
+    public function reverse(): void
+    {
+        $prev = null;
+        $current = $this->head;
+
+        while ($current != null)
+        {
+            $next = $current->next;
+            $current->next = $prev;
+            $prev = $current;
+            $current = $next;
+        }
+
+        $this->head = $prev;
+    }
+
+    public function insertAtPosition($data, $position)
+    {
+        $current = $this->head;
+        $newNode = new Node($data);
+        $count = 0;
+
+        if ($position == 0)
+        {
+            $newNode->next = $this->head;
+            $this->head = $newNode;
+            return null;
+        }
+
+        while ($current != null && $count < $position - 1)
+        {
+            $current = $current->next;
+            $count++;
+        }
+
+        if ($current === null) {
+            echo "Error: Position out of bounds\n";
+            return;
+        }
+
+        $newNode->next = $current->next;
+        $current->next = $newNode;
     }
 
 }
