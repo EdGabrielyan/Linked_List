@@ -9,6 +9,7 @@ $list->insert(2);
 $list->insert(3);
 $list->insert(4);
 $list->insert(5);
+$list->insert(6);
 
 //echo "before. \n";
 //$list->display();
@@ -32,6 +33,9 @@ $list->insert(5);
 //$list2->insert(4);
 //
 //$list = LinkedList::mergeTwoLists($list1, $list2);
+
 $list->display();
-$list->removeNthFromEnd(5);
+$list->middleNode();
 $list->display();
+
+//$list->removeNthFromEnd(5);

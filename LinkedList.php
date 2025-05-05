@@ -207,4 +207,29 @@ class LinkedList
         return $this->head;
     }
 
+    public function middleNode(): Node
+    {
+        $count = 0;
+        $countHead = $this->head;
+
+        while ($countHead != null)
+        {
+            ++$count;
+            $countHead = $countHead->next;
+        }
+
+        $target = intdiv($count, 2) + 1;
+        $count2 = 1;
+        while ($this->head != null)
+        {
+            if ($count2 == $target)
+            {
+                return $this->head;
+            }
+            $this->head = $this->head->next;
+            ++$count2;
+        }
+        return $this->head;
+    }
+
 }
