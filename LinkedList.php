@@ -182,4 +182,29 @@ class LinkedList
         return $mergedList;
     }
 
+    public function removeNthFromEnd($n): Node
+    {
+        $fast = $this->head;
+        $slow = $this->head;
+
+        for ($i = 0; $i <= $n; ++$i)
+        {
+            if ($fast->next === null) {
+                $this->head = $this->head->next;
+                return $this->head->next;
+            }
+            $fast = $fast->next;
+        }
+
+        while ($fast != null)
+        {
+            $fast = $fast->next;
+            $slow = $slow->next;
+        }
+
+        $slow->next = $slow->next->next;
+
+        return $this->head;
+    }
+
 }
