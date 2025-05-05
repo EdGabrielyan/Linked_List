@@ -70,7 +70,7 @@ class LinkedList
         $this->head = $newNode;
     }
 
-    public function deleteFirst()
+    public function deleteFirst(): void
     {
         if ($this->head == null)
         {
@@ -125,7 +125,7 @@ class LinkedList
         $this->head = $prev;
     }
 
-    public function insertAtPosition($data, $position)
+    public function insertAtPosition($data, $position): void
     {
         $current = $this->head;
         $newNode = new Node($data);
@@ -135,7 +135,7 @@ class LinkedList
         {
             $newNode->next = $this->head;
             $this->head = $newNode;
-            return null;
+            return;
         }
 
         while ($current != null && $count < $position - 1)
@@ -151,6 +151,35 @@ class LinkedList
 
         $newNode->next = $current->next;
         $current->next = $newNode;
+    }
+
+    public static function mergeTwoLists($list1, $list2): LinkedList
+    {
+        $dummy = new Node(0);
+        $current = $dummy;
+
+        $current1 = $list1->head;
+        $current2 = $list2->head;
+
+        while($current1 != null && $current2 != null)
+        {
+            if ($current1->data <= $current2->data)
+            {
+                $current->next = $current1;
+                $current1 = $current1->next;
+            } else {
+                $current->next = $current2;
+                $current2 = $current2->next;
+            }
+            $current = $current->next;
+        }
+
+        $current->next = $current1 ?? $current2;
+
+        $mergedList = new self();
+        $mergedList->head = $dummy->next;
+
+        return $mergedList;
     }
 
 }
