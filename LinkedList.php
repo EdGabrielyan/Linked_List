@@ -232,4 +232,27 @@ class LinkedList
         return $this->head;
     }
 
+    public function removeElements($val): Node
+    {
+        $dummy = new Node(0);
+        $prev = $dummy;
+
+        $current = $this->head;
+        $prev->next = $current;
+
+        while ($current != null)
+        {
+            if ($current->data == $val)
+            {
+                $prev->next = $current->next;
+                $current = $current->next;
+            } else {
+                $prev = $current;
+                $current = $current->next;
+            }
+
+        }
+        $this->head = $dummy->next;
+        return $this->head;
+    }
 }

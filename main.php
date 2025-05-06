@@ -4,8 +4,9 @@ require_once 'LinkedList.php';
 
 $list = new LinkedList();
 
-$list->insert(1);
+$list->insert(6);
 $list->insert(2);
+$list->insert(6);
 $list->insert(3);
 $list->insert(4);
 $list->insert(5);
@@ -35,7 +36,7 @@ $list->insert(6);
 //$list = LinkedList::mergeTwoLists($list1, $list2);
 
 $list->display();
-$list->middleNode();
+$list->removeElements(6);
 $list->display();
 
 //$list->removeNthFromEnd(5);
