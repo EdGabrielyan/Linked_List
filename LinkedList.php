@@ -254,4 +254,65 @@ class LinkedList
         $this->head = $dummy->next;
         return $this->head;
     }
+
+    public function addTwoNumbers($l1, $l2) {
+
+        $dummy = new Node(0);
+        $this->head = $dummy;
+
+        $current1 = $l1->head;
+        $current2 = $l2->head;
+
+        $array1 = [];
+        $array2 = [];
+
+        $num1 = 0;
+        $num2 = 0;
+
+        while ($current1 != null)
+        {
+            $array1[] = $current1->data;
+            $current1 = $current1->next;
+        }
+
+        while ($current2 != null)
+        {
+            $array2[] = $current2->data;
+            $current2 = $current2->next;
+        }
+
+        for ($i = (count($array1) - 1); $i >= 0; $i--)
+        {
+            $num1 = 10 * $num1 + $array1[$i];
+        }
+
+        for ($i = (count($array2) - 1); $i >= 0; $i--)
+        {
+            $num2 = 10 * $num2 + $array2[$i];
+        }
+
+        $num = $num1 + $num2;
+
+        if ($num == 0)
+        {
+            $newNode = new Node(0);
+            $this->head = $newNode;
+            return;
+        }
+
+        while ($num > 0)
+        {
+            $data = $num % 10;
+
+            $newNode = new Node($data);
+
+            $dummy->next = $newNode;
+            $dummy = $dummy->next;
+
+            $num = intdiv($num, 10);
+        }
+
+        $this->head = $this->head->next;
+    }
+
 }
