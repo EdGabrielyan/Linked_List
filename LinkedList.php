@@ -245,11 +245,10 @@ class LinkedList
             if ($current->data == $val)
             {
                 $prev->next = $current->next;
-                $current = $current->next;
             } else {
                 $prev = $current;
-                $current = $current->next;
             }
+            $current = $current->next;
 
         }
         $this->head = $dummy->next;
