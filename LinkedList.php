@@ -368,4 +368,133 @@ class LinkedList
         }
     }
 
+    public function continuouslyNodes($list1, $list2, $array): void
+    {
+        $head1 = $list1->head;
+        $head2 = $list2->head;
+
+        while($head1->next != null)
+        {
+            $head1 = $head1->next;
+        }
+
+        while($head2->next != null)
+        {
+            $head2 = $head2->next;
+        }
+
+        foreach ($array as $value)
+        {
+            $newNode = new Node($value);
+            $head1->next = $newNode;
+            $head1 = $head1->next;
+            $head2->next = $newNode;
+            $head2 = $head2->next;
+        }
+    }
+
+    public function getIntersectionNode($list1, $list2): ?Node
+    {
+        $headA = $list1->head;
+        $headB = $list2->head;
+
+        $head1 = $headA;
+        $head2 = $headB;
+
+        $currentA = $headA;
+        $currentB = $headB;
+
+        $countA = 0;
+        $countB = 0;
+
+        while ($currentA != null || $currentB != null)
+        {
+            if ($currentA != null)
+            {
+                $currentA = $currentA->next;
+                ++$countA;
+            }
+
+            if ($currentB != null)
+            {
+                $currentB = $currentB->next;
+                ++$countB;
+            }
+        }
+
+        $difference = $countA - $countB;
+
+        if ($difference > 0)
+        {
+            while ($difference)
+            {
+                $head1 = $head1->next;
+                --$difference;
+            }
+        }
+
+        if ($difference < 0)
+        {
+            while ($difference)
+            {
+                $head2 = $head2->next;
+                ++$difference;
+            }
+        }
+
+        while($head1 != null)
+        {
+            if ($head1 === $head2)
+            {
+                $this->head = $head1;
+                return $this->head;
+            }
+            $head1 = $head1->next;
+            $head2 = $head2->next;
+        }
+        return null;
+    }
+
+    public function getIntersectionNode2($list1, $list2): ?Node
+    {
+        $head1 = $list1->head;
+        $head2 = $list2->head;
+
+        $current2 = $head2;
+
+        while ($head1 != null)
+        {
+            while ($head2 != null)
+            {
+                if ($head1 === $head2)
+                {
+                    $this->head = $head1;
+                    return $this->head;
+                }
+                $head2 = $head2->next;
+            }
+            $head1 = $head1->next;
+            $head2 = $current2;
+        }
+        return null;
+    }
+
+    public function getIntersectionNode3($list1, $list2)
+    {
+        $head1 = $list1->head;
+        $head2 = $list2->head;
+
+        $current1 = $head1;
+        $current2 = $head2;
+
+        while ($current1 !== $current2)
+        {
+            $current1 = $current1 === null ? $head2 : $current1->next;
+            $current2 = $current2 === null ? $head1 : $current2->next;
+        }
+
+        $this->head = $current1;
+        return $this->head;
+    }
+
 }
