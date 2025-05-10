@@ -255,7 +255,7 @@ class LinkedList
         return $this->head;
     }
 
-    public function addTwoNumbers($l1, $l2) {
+    public function addTwoNumbers($l1, $l2): void {
 
         $dummy = new Node(0);
         $this->head = $dummy;
@@ -313,6 +313,59 @@ class LinkedList
         }
 
         $this->head = $this->head->next;
+    }
+
+    public function addTwoNumbers2($l1, $l2): ?Node
+    {
+        $dummy = new Node(0);
+        $this->head = $dummy;
+        $current = $dummy;
+
+        $l1 = $l1->head;
+        $l2 = $l2->head;
+
+        $carry = 0;
+
+        while ($l1 !== null || $l2 !== null) {
+            $x = ($l1 !== null) ? $l1->data : 0;
+            $y = ($l2 !== null) ? $l2->data : 0;
+
+            $sum = $x + $y + $carry;
+            $carry = (int)($sum / 10);
+
+            $current->next = new Node($sum % 10);
+            $current = $current->next;
+
+            if ($l1 !== null) $l1 = $l1->next;
+            if ($l2 !== null) $l2 = $l2->next;
+        }
+
+        if ($carry > 0) {
+            $current->next = new Node($carry);
+        }
+
+        $this->head = $this->head->next;
+        return $this->head;
+    }
+
+    public function deleteDuplicates(): void {
+
+        $current = $this->head->next;
+        $dummy = $this->head;
+
+        while ($current != null)
+        {
+            if ($dummy->data != $current->data)
+            {
+                $dummy->next = $current;
+                $dummy = $dummy->next;
+            }
+            $current = $current->next;
+        }
+
+        if ($dummy->next != null) {
+            $dummy->next = null;
+        }
     }
 
 }
