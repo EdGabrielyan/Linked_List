@@ -5,9 +5,9 @@ require_once 'LinkedList.php';
 $list = new LinkedList();
 
 $list->insert(1);
-$list->insert(2);
-//$list->insert(2);
-//$list->insert(1);
+$list->insert(1);
+$list->insert(0);
+$list->insert(1);
 //$list->insert(4);
 //$list->insert(4);
 //$list->insert(5);
@@ -42,4 +42,4 @@ $list->insert(2);
 //$list->getIntersectionNode3($list1, $list2);
 //$list->display();
 
-echo $list->isPalindrome();
+echo $list->getDecimalValue();

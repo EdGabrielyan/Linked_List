@@ -530,4 +530,16 @@ class LinkedList
         return true;
     }
 
+    function getDecimalValue() {
+        $str = '';
+
+        while ($this->head != null)
+        {
+            $str .= $this->head->data;
+            $this->head = $this->head->next;
+        }
+
+        return bindec($str);
+    }
+
 }
