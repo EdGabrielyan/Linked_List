@@ -497,4 +497,37 @@ class LinkedList
         return $this->head;
     }
 
+    public function isPalindrome(): bool
+    {
+        if ($this->head === null || $this->head->next === null)
+        {
+            return true;
+        }
+
+        $slow = $this->head;
+        $fast = $this->head;
+        while ($fast !== null && $fast->next !== null) {
+            $slow = $slow->next;
+            $fast = $fast->next->next;
+        }
+
+        $prev = null;
+        while ($slow !== null) {
+            $next = $slow->next;
+            $slow->next = $prev;
+            $prev = $slow;
+            $slow = $next;
+        }
+
+        $first = $this->head;
+        $second = $prev;
+        while ($second !== null) {
+            if ($first->data !== $second->data) return false;
+            $first = $first->next;
+            $second = $second->next;
+        }
+
+        return true;
+    }
+
 }
